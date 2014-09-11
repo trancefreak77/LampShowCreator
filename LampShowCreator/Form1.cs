@@ -72,6 +72,10 @@ namespace LampShowCreator {
       for (int column = 0; column < 100; column ++) {
         stateMachineString += "  case " + currentState + ":\n";
         foreach (var lampKey in lampTimeDictionary.Keys) {
+          if (lampTimeDictionary[lampKey].Count <= column) {
+            break;
+          }
+
           if (lampTimeDictionary[lampKey][column] != currentLampStates[lampKey]) {
             currentLampStates[lampKey] = lampTimeDictionary[lampKey][column];
             stateMachineString = string.Concat(stateMachineString, "    lamps[" + lampKey + "] = " + currentLampStates[lampKey] + ";\n");
